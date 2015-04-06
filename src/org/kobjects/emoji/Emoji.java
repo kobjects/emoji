@@ -8,7 +8,7 @@ public class Emoji implements Comparable<Emoji> {
 
   public enum Property {
     ANIMAL,
-    BLUE, BIRD, BOAT,
+    BLUE, BIRD, BOAT, BROWN,
     CIRCLE, 
     SWEETS, 
     EMERGENCY_VEHICLE,
@@ -19,6 +19,7 @@ public class Emoji implements Comparable<Emoji> {
     ISSUES,
     MAMMAL,
     MOTORIZED,
+ //   ORANGE,
     PLANT, PURPLE,
     RAIL_VEHICLE, RED, REPTILE, ROAD_VEHICLE,
     SQUARE, SWIMMING,
@@ -47,6 +48,7 @@ public class Emoji implements Comparable<Emoji> {
   private static final long BIRD = ANIMAL | Property.BIRD.mask();
   private static final long BLUE = Property.BLUE.mask();
   private static final long BOAT = Property.BOAT.mask() | Property.VEHICLE.mask() | Property.SWIMMING.mask();
+  private static final long BROWN = Property.BROWN.mask();
   private static final long CIRCLE = Property.CIRCLE.mask();
   private static final long SWEETS = (Property.FOOD.mask()) | 
                                        Property.SWEETS.mask();
@@ -55,13 +57,14 @@ public class Emoji implements Comparable<Emoji> {
   private static final long FLOWER = Property.FLOWER.mask() | Property.PLANT.mask();
   private static final long FLYING = Property.FLYING.mask();
   private static final long FOOD = Property.FOOD.mask();
-  private static final long FRUIT = Property.FOOD.mask() | Property.PLANT.mask();
+  private static final long FRUIT = Property.FOOD.mask() | Property.PLANT.mask() | Property.FRUIT.mask();
   private static final long GREEN = Property.GREEN.mask();
   private static final long HEART = Property.HEART.mask();
   private static final long INSECT = ANIMAL | Property.INSECT.mask();
   private static final long ISSUES = Property.ISSUES.mask();
   private static final long MAMMAL = ANIMAL | Property.MAMMAL.mask();
   private static final long MOTORIZED = Property.VEHICLE.mask() | Property.MOTORIZED.mask();
+//  private static final long ORANGE = Property.ORANGE.mask();
   private static final long PLANT = Property.PLANT.mask();
   private static final long PURPLE = Property.PURPLE.mask();
   private static final long REPTILE = ANIMAL | Property.REPTILE.mask();
@@ -77,7 +80,7 @@ public class Emoji implements Comparable<Emoji> {
   public enum Category implements Iterable<Property> {
     ANIMAL(Property.ANIMAL, Property.BIRD, Property.INSECT, Property.MAMMAL, 
         Property.FISH, Property.REPTILE),
-    COLOR(Property.BLUE, Property.GREEN, Property.RED, Property.PURPLE, Property.YELLOW), 
+    COLOR(Property.BLUE, Property.BROWN, Property.GREEN, Property.RED, Property.PURPLE, Property.YELLOW), 
     SHAPE(Property.CIRCLE, Property.HEART, Property.TRIANGLE, Property.SQUARE), 
     FOOD(Property.FOOD, Property.SWEETS, Property.FRUIT),
     PLANT(Property.PLANT, Property.FRUIT, Property.FLOWER),
@@ -127,7 +130,7 @@ public class Emoji implements Comparable<Emoji> {
     
     add(0x1f315, YELLOW | CIRCLE, "full moon symbol");
     
-    add(0x1f330, PLANT | SWEETS, "chestnut");
+    add(0x1f330, PLANT | BROWN, "chestnut");
     add(0x1f331, GREEN | PLANT, "seedling");
     add(0x1f332, GREEN | PLANT, "evergreen tree");
     add(0x1f333, GREEN | PLANT, "deciduous tree");
@@ -141,7 +144,7 @@ public class Emoji implements Comparable<Emoji> {
     add(0x1f33b, FLOWER | ISSUES, "sunflower");  // looks like sun
     add(0x1f33c, FLOWER, "blossom");
     add(0x1f33d, PLANT | YELLOW | FOOD, "ear of maize");  
-    add(0x1f33e, PLANT | ISSUES, "ear of rice");  // Food but hard to recognize
+    add(0x1f33e, PLANT | FOOD | ISSUES, "ear of rice");  // Food but hard to recognize
     add(0x1f33f, PLANT, "herb");
     add(0x1f340, PLANT | GREEN, "four leaf clover");
     add(0x1f341, PLANT | RED, "maple leaf");
@@ -202,7 +205,7 @@ public class Emoji implements Comparable<Emoji> {
     
     add(0x1f400, MAMMAL, "rat");
     add(0x1f401, MAMMAL, "mouse");
-    add(0x1f402, MAMMAL, "ox");
+    add(0x1f402, MAMMAL | BROWN, "ox");
     add(0x1f403, MAMMAL, "water buffalo");
     add(0x1f404, MAMMAL, "cow");
     add(0x1f405, MAMMAL, "tiger");
@@ -212,18 +215,18 @@ public class Emoji implements Comparable<Emoji> {
   //  add(0x1f409, GREEN, "dragon");
     add(0x1f40a, REPTILE | GREEN, "crocodile");
     add(0x1f40b, MAMMAL | SWIMMING, "whale");
-    add(0x1f40c, ANIMAL, "snail");
+    add(0x1f40c, ANIMAL | GREEN, "snail");
     add(0x1f40d, ANIMAL, "snake");
     add(0x1f40e, MAMMAL, "horse");
     add(0x1f40f, MAMMAL, "ram");
     add(0x1f410, MAMMAL, "goat");
     add(0x1f411, MAMMAL, "sheep");
-    add(0x1f412, MAMMAL, "monkey");
+    add(0x1f412, MAMMAL | BROWN, "monkey");
     add(0x1f413, BIRD, "rooster");
     add(0x1f414, BIRD, "chicken");
     add(0x1f415, MAMMAL, "dog");
     add(0x1f416, MAMMAL, "pig");
-    add(0x1f417, MAMMAL, "boar");
+    add(0x1f417, MAMMAL | BROWN, "boar");
     add(0x1f418, MAMMAL, "elephant");
     add(0x1f419, ANIMAL | SWIMMING, "octopus");
     add(0x1f41a, 0, "spiral shell");
@@ -253,17 +256,19 @@ public class Emoji implements Comparable<Emoji> {
 //    add(0x1f432, GREEN, "dragon face");
     add(0x1f433, MAMMAL | SWIMMING, "spouting whale");
     add(0x1f434, MAMMAL, "horse face");
-    add(0x1f435, MAMMAL, "monkey face");
+    add(0x1f435, MAMMAL | BROWN, "monkey face");
     add(0x1f436, MAMMAL, "dog face");
     add(0x1f437, MAMMAL, "pig face");
     add(0x1f438, REPTILE | GREEN, "frog face");
     add(0x1f439, MAMMAL, "hamster face");
     add(0x1f43a, MAMMAL, "wolf face");
-    add(0x1f43b, MAMMAL, "bear face");
+    add(0x1f43b, MAMMAL | BROWN, "bear face");
     add(0x1f43c, MAMMAL, "panda face");
     
-    add(0x1f498, HEART | RED, "heart with arrow");
+    add(0x1f498, HEART, "heart with arrow");
     add(0x1f499, HEART | BLUE, "blue heart");
+    add(0x1f49a, HEART | GREEN, "green heart");
+    add(0x1f49b, HEART | YELLOW, "yellow heart");
     add(0x1f49c, HEART | PURPLE, "purple heart");
     
     add(0x1f4a1, 0, "electric light bulb");
@@ -276,17 +281,17 @@ public class Emoji implements Comparable<Emoji> {
     
     add(0x1f4d7, GREEN, "green book");
     add(0x1f4d8, BLUE, "blue book");
-    add(0x1f4d9, 0, "orange book");
+    add(0x1f4d9, 0, "orange book");  // Matches red on android
     
     add(0x1f534, RED | CIRCLE, "large red circle");
     add(0x1f535, BLUE | CIRCLE, "large blue circle");
-    add(0x1f536, SQUARE, "large orange diamond");
+    add(0x1f536, SQUARE, "large orange diamond");  // Not marked as orange because it matches yellow on Android
     add(0x1f537, SQUARE, "large blue diamond"); // not blue on android
 //    add(0x1f539, BLUE | SQUARE, "small blue diamond");  not blue on android
     add(0x1f53a, RED | TRIANGLE, "up-pointing red triangle");
     add(0x1f53b, RED | TRIANGLE, "down-pointing red triangle");
     
-    add(0x1f550, CIRCLE, "clock face one oclock");
+    add(0x1f550, 0, "clock face one oclock");
     
     add(0x1f680, VEHICLE | MOTORIZED | FLYING, "rocket");
     add(0x1f681, VEHICLE | MOTORIZED | FLYING, "helicopter");
@@ -301,7 +306,7 @@ public class Emoji implements Comparable<Emoji> {
     add(0x1f68a, RAIL_VEHICLE | MOTORIZED, "tram");
     add(0x1f68b, RAIL_VEHICLE | MOTORIZED, "tram car");
     add(0x1f68c, ROAD_VEHICLE | MOTORIZED, "bus");
-    add(0x1f68d, ROAD_VEHICLE | MOTORIZED | ISSUES, "oncoming bus");
+    add(0x1f68d, ROAD_VEHICLE | MOTORIZED | ISSUES, "oncoming bus"); // hard to distinguish from train
     add(0x1f68e, ROAD_VEHICLE | MOTORIZED | ISSUES, "trolleybus");  // hard to distinguish from rail
     add(0x1f68f, 0, "bus stop");
     add(0x1f690, ROAD_VEHICLE | MOTORIZED, "minibus");
@@ -339,6 +344,18 @@ public class Emoji implements Comparable<Emoji> {
     return (properties & expected.mask()) == expected.mask();
   }
 
+  public static boolean isEmoji(String s) {
+	int i = 0;
+	while (i < s.length()) {
+      int codepoint = Character.codePointAt(s, i);
+      if (codepoint < 0x1f300 || codepoint > 0x1f6ff) {
+    	  return false;
+      }
+	  i += codepoint >= 0x010000 ? 2 : 1;
+	}
+	return true;
+  }
+  
   /**
    * Returns whether all the characters in s have the expected
    * properties. Returns false if s is null or empty.
