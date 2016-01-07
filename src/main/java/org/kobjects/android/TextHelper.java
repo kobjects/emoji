@@ -12,6 +12,7 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 
 
@@ -22,7 +23,7 @@ import android.graphics.Typeface;
 public class TextHelper {
   private static final int RED = 0xffed6c30;
   private static final int GREEN = 0xffbdcf46;
-  
+
   public enum VerticalAlign {
 	  TOP, CENTER, BASELINE, BOTTOM
   };
@@ -117,8 +118,31 @@ public class TextHelper {
 		  float x, float y, Paint paint) {
 	  drawText(context, canvas, text, start, end, x, y, paint, VerticalAlign.BASELINE);
   }
-  
-  public static void drawText(Context context, Canvas canvas, CharSequence text, int start, int end, 
+
+  public static void getTextBounds(Paint paint, String text, VerticalAlign verticalAlign, RectF rectF) {
+    getTextBounds(paint, text, 0, text.length(), verticalAlign, rectF);
+  }
+
+  public static void getTextBounds(Paint paint, String text, int start, int end, VerticalAlign verticalAlign, RectF rectF) {
+    float ascent = Math.abs(paint.ascent());
+    float descent = Math.abs(paint.descent());
+    float size = ascent + descent;
+    Align horizontalAlign = paint.getTextAlign();
+    float width = measureText(paint, text, start, end);
+    switch(horizontalAlign) {
+      case LEFT: rectF.left = 0; rectF.right = width; break;
+      case RIGHT: rectF.left = -width; rectF.right = 0; break;
+      case CENTER: rectF.left = -width / 2; rectF.right = width / 2; break;
+    }
+    switch(verticalAlign) {
+      case CENTER: rectF.top = -size / 2; rectF.bottom = size / 2; break;
+      case BASELINE: rectF.top = -ascent; rectF.bottom = descent; break;
+      case BOTTOM: rectF.top = -size; rectF.bottom = 0; break;
+      case TOP: rectF.top = 0; rectF.bottom = size; break;
+    }
+  }
+
+  public static void drawText(Context context, Canvas canvas, CharSequence text, int start, int end,
 		  float x, float y, Paint paint, VerticalAlign verticalAlign) {
     float ascent = Math.abs(paint.ascent());
     float descent = Math.abs(paint.descent());
