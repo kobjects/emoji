@@ -1,4 +1,4 @@
-package org.kobjects.android;
+package org.kobjects.emoji.android;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +18,7 @@ import android.graphics.Typeface;
 
 /**
  * Provides a set of static drawText methods with support for vertical alignment
- * and Emoji fallback images.
+ * and emoji fallback images.
  */
 public class TextHelper {
   private static final int RED = 0xffed6c30;
@@ -59,8 +59,7 @@ public class TextHelper {
     if (bitmap == null) {
       if (regionDecoder == null) {
         try {
-          InputStream is = context.getResources().openRawResource(
-              org.kobjects.R.drawable.emoji_fallback);
+          InputStream is = context.getAssets().open("emoji_fallback.png");
           regionDecoder = BitmapRegionDecoder.newInstance(is, false);
         } catch(IOException e) {
           throw new RuntimeException(e);

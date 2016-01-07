@@ -4,6 +4,10 @@ import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+/**
+ * Provides access to a subset of the emojis available on Android by some properties
+ * (such as color).
+ */
 public class Emoji implements Comparable<Emoji> {
 
   public enum Property {
@@ -19,10 +23,10 @@ public class Emoji implements Comparable<Emoji> {
     ISSUES,
     MAMMAL,
     MOTORIZED,
- //   ORANGE,
+ //   ORANGE,  Removed because too hard to distinguish from red or yellow in some cases.
     PLANT, PURPLE,
     RAIL_VEHICLE, RED, REPTILE, ROAD_VEHICLE,
-    SQUARE, SWIMMING,
+    SQUARE, SWIMMING_OR_FLOATING,
     TRIANGLE,
     VEHICLE, 
     YELLOW;
@@ -47,13 +51,13 @@ public class Emoji implements Comparable<Emoji> {
   private static final long ANIMAL = Property.ANIMAL.mask();
   private static final long BIRD = ANIMAL | Property.BIRD.mask();
   private static final long BLUE = Property.BLUE.mask();
-  private static final long BOAT = Property.BOAT.mask() | Property.VEHICLE.mask() | Property.SWIMMING.mask();
+  private static final long BOAT = Property.BOAT.mask() | Property.VEHICLE.mask() | Property.SWIMMING_OR_FLOATING.mask();
   private static final long BROWN = Property.BROWN.mask();
   private static final long CIRCLE = Property.CIRCLE.mask();
   private static final long SWEETS = (Property.FOOD.mask()) | 
                                        Property.SWEETS.mask();
   private static final long EMERGENCY_VEHICLE = Property.ROAD_VEHICLE.mask() | Property.VEHICLE.mask() | Property.MOTORIZED.mask();
-  private static final long FISH = ANIMAL | Property.FISH.mask() | Property.SWIMMING.mask();
+  private static final long FISH = ANIMAL | Property.FISH.mask() | Property.SWIMMING_OR_FLOATING.mask();
   private static final long FLOWER = Property.FLOWER.mask() | Property.PLANT.mask();
   private static final long FLYING = Property.FLYING.mask();
   private static final long FOOD = Property.FOOD.mask();
@@ -72,7 +76,7 @@ public class Emoji implements Comparable<Emoji> {
   private static final long RED = Property.RED.mask();
   private static final long ROAD_VEHICLE = Property.VEHICLE.mask() | Property.ROAD_VEHICLE.mask();
   private static final long SQUARE = Property.SQUARE.mask();
-  private static final long SWIMMING = Property.SWIMMING.mask();
+  private static final long SWIMMING = Property.SWIMMING_OR_FLOATING.mask();
   private static final long TRIANGLE = Property.TRIANGLE.mask();
   private static final long VEHICLE = Property.VEHICLE.mask();
   private static final long YELLOW = Property.YELLOW.mask();
@@ -86,7 +90,7 @@ public class Emoji implements Comparable<Emoji> {
     PLANT(Property.PLANT, Property.FRUIT, Property.FLOWER),
     VEHICLE(Property.VEHICLE, Property.BOAT, Property.EMERGENCY_VEHICLE,
         Property.RAIL_VEHICLE, Property.ROAD_VEHICLE, Property.MOTORIZED),
-    OTHER(Property.SWIMMING, Property.FLYING);
+    OTHER(Property.SWIMMING_OR_FLOATING, Property.FLYING);
 
     private TreeSet<Property> propertySet = new TreeSet<Property>();
     Category(Property... properties) {
@@ -357,10 +361,9 @@ public class Emoji implements Comparable<Emoji> {
   }
   
   /**
-   * Returns whether all the characters in s have the expected
-   * properties. Returns false if s is null or empty.
+   * Returns whether any of the characters in s has the expected properties.
    */
-  public static boolean is(String s, Property expected) {
+  public static boolean contains(String s, Property expected) {
     if (s == null || s.length() == 0) {
       return false;
     }
