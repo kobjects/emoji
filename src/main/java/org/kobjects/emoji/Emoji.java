@@ -134,7 +134,7 @@ public class Emoji implements Comparable<Emoji> {
     
     add(0x1f315, YELLOW | CIRCLE, "full moon symbol");
     
-    add(0x1f330, PLANT | BROWN, "chestnut");
+    add(0x1f330, PLANT | BROWN | FOOD, "chestnut");
     add(0x1f331, GREEN | PLANT, "seedling");
     add(0x1f332, GREEN | PLANT, "evergreen tree");
     add(0x1f333, GREEN | PLANT, "deciduous tree");
