@@ -216,10 +216,10 @@ public class Emoji implements Comparable<Emoji> {
     add(0x1f406, MAMMAL, "leopart");
     add(0x1f407, MAMMAL, "rabbit");
     add(0x1f408, MAMMAL, "cat");
-  //  add(0x1f409, GREEN, "dragon");
+    add(0x1f409, 0, "dragon");
     add(0x1f40a, REPTILE | GREEN, "crocodile");
     add(0x1f40b, MAMMAL | SWIMMING, "whale");
-    add(0x1f40c, ANIMAL | GREEN, "snail");
+    add(0x1f40c, ANIMAL, "snail");
     add(0x1f40d, ANIMAL, "snake");
     add(0x1f40e, MAMMAL, "horse");
     add(0x1f40f, MAMMAL, "ram");
